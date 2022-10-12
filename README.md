@@ -32,12 +32,12 @@ To use the combiner as a module in other modules, for example,
     import csv_combiner
 
     input_list = ['./test_files/table_1.csv', './test_files/table_2.csv']
-OUTPUT_FILE = './test_files/output.csv'
+    OUTPUT_FILE = './test_files/output.csv'
 
-with open(OUTPUT_FILE, 'w', encoding='utf-8') as fh:
-    writer = csv_combiner.get_csv_writer(fh)
-    headers = csv_combiner.get_headers(input_list)
-    csv_combiner.build_combined_csv(writer, headers, input_list)
+    with open(OUTPUT_FILE, 'w', encoding='utf-8') as fh:
+        writer = csv_combiner.get_csv_writer(fh)
+        headers = csv_combiner.get_headers(input_list)
+        csv_combiner.build_combined_csv(writer, headers, input_list)
 
 ---
 
