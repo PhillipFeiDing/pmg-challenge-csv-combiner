@@ -1,7 +1,7 @@
 # CSV Combiner (Candidate Solution)
 
 ## Basics
-- `csv_combiner.py` the CSV combiner; we use it by calling the script with command line arguments. There is also another way to use it as a module, for which the details are in the unit test file. The basic idea is to use a single CSV writer for the output file and loop through the input list by creating a reader for each input file. **Note our approach uses file handles instead of storing intermediate results in memory, so it is memory-efficient and can easily handle input size as large as 2GB. There are also exceptions for incorrectly formatted input, for which an error is thrown on command line to tell the user such errors and the output is corrupt. For example,**
+- `csv_combiner.py` the CSV combiner; we use it by calling the script with command line arguments. There is also another way to use it as a module, for which the details are in the unit test file and below. The basic idea is to use a single CSV writer for the output file and loop through the input list by creating a reader for each input file. **Note our approach uses file handles instead of storing intermediate results in memory, so it is memory-efficient and can easily handle input size as large as 2GB. There are also exceptions for incorrectly formatted input, for which an error is thrown on command line to tell the user such errors and the output is corrupt. For example,**
   - Non-existent input file(s).
   - Empty input file (missing header).
   - Header & row mismatch.
@@ -13,7 +13,7 @@ To generate the combined CSV file out of `input_1.csv`, `input_2.csv`, ..., `inp
 
     python input_1.csv input_2.csv ... input_n.csv > output.csv
 
-For example, the provided output file `combined.csv` contains is the result of running
+For example, the provided output file `combined.csv` contains the result of running
 
     python csv_combiner.py ./fixtures/accessories.csv ./fixtures/clothing.csv > combined.csv
 
@@ -23,11 +23,25 @@ To run the entire test suite:
 
     python csv_combiner_test.py
 
-To run a single test case, e.g. test_append_content_empty
+To run a single test case, e.g. `test_append_content_empty`
 
     python csv_combiner_test.py CSVCombinerTests.test_append_content_empty
 
+To use the combiner as a module in other modules, for example,
+
+    import csv_combiner
+
+    input_list = ['./test_files/table_1.csv', './test_files/table_2.csv']
+OUTPUT_FILE = './test_files/output.csv'
+
+with open(OUTPUT_FILE, 'w', encoding='utf-8') as fh:
+    writer = csv_combiner.get_csv_writer(fh)
+    headers = csv_combiner.get_headers(input_list)
+    csv_combiner.build_combined_csv(writer, headers, input_list)
+
 ---
+
+*Begin original README*
 
 # CSV Combiner
 
