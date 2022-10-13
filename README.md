@@ -1,5 +1,9 @@
 # CSV Combiner (Candidate Solution)
 
+## Requirements
+
+- Python 3.X There should be no need to install additional libraries and/or setting up virtual environments.
+
 ## Basics
 - `csv_combiner.py` the CSV combiner; we use it by calling the script with command line arguments. There is also another way to use it as a module, for which the details are in the unit test file and below. The basic idea is to use a single CSV writer for the output file and loop through the input list by creating a reader for each input file. **Note our approach uses file handles instead of storing intermediate results in memory, so it is memory-efficient and can easily handle input size as large as 2GB. There are also exceptions for incorrectly formatted input, for which an error is thrown on command line to tell the user such errors and the output is corrupt. For example,**
   - Non-existent input file(s).
